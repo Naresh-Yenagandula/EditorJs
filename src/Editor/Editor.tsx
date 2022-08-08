@@ -8,6 +8,8 @@ import SubscriptIcon from '@mui/icons-material/Subscript';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
+import SaveIcon from '@mui/icons-material/Save';
+import EditIcon from '@mui/icons-material/Edit';
 import "./Editor.css"
 import { useState } from 'react';
 
@@ -72,48 +74,53 @@ const Editor = (props: object) => {
     return (
         <div className="container">
             <div className="box">
-                <button className='save' onClick={() => setEditable(!editable)}>{
-                    editable ? "Save" : "Edit"
-                }</button>
-                <div className="options">
-                    {
-                        options.map((option) => {
-                            return (
-                                <button
-                                    className="option-button"
-                                    id={option.id}
-                                    onClick={() => modifyText(option.id)}
-                                >
-                                    {option.name}
-                                </button>
-                            )
-                        })
-                    }
-                    <button id="createLink" className='option-button' onClick={() => createLink()}><InsertLinkIcon /></button>
-                    <select name="" id="fontName" onChange={(e) => modifyText("fontName", false, e.target.value)}>
-                        <option value="Arial">Arial</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Georgia">Georgia</option>
-                    </select>
-                    <select name="" id="fontSize" onChange={(e) => modifyText("fontSize", false, e.target.value)}>
-                        <option value="1">10</option>
-                        <option value="2">12</option>
-                        <option value="3">14</option>
-                        <option value="4">16</option>
-                        <option value="5">18</option>
-                    </select>
-                    <div className="color">
-                        <label htmlFor="foreColor">Font Color: </label>
-                        <input id="foreColor" type="color" onChange={(e) => modifyText("foreColor", false, e.target.value)} />
+                {editable ?
+                    <div className="options">
+                        {
+                            options.map((option) => {
+                                return (
+                                    <button
+                                        className="option-button"
+                                        id={option.id}
+                                        onClick={() => modifyText(option.id)}
+                                    >
+                                        {option.name}
+                                    </button>
+                                )
+                            })
+                        }
+                        <button id="createLink" className='option-button' onClick={() => createLink()}><InsertLinkIcon /></button>
+                        <select name="" id="fontName" onChange={(e) => modifyText("fontName", false, e.target.value)}>
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Georgia">Georgia</option>
+                        </select>
+                        <select name="" id="fontSize" onChange={(e) => modifyText("fontSize", false, e.target.value)}>
+                            <option value="1">10</option>
+                            <option value="2">12</option>
+                            <option value="3">14</option>
+                            <option value="4">16</option>
+                            <option value="5">18</option>
+                        </select>
+                        <div className="color">
+                            <label htmlFor="foreColor">Font Color: </label>
+                            <input id="foreColor" type="color" onChange={(e) => modifyText("foreColor", false, e.target.value)} />
+                        </div>
+                        <div className='color'>
+                            <label htmlFor="backColor">Highlight: </label>
+                            <input id="backColor" type="color" onChange={(e) => modifyText("backColor", false, e.target.value)} />
+                        </div>
                     </div>
-                    <div className='color'>
-                        <label htmlFor="backColor">Highlight: </label>
-                        <input id="backColor" type="color" onChange={(e) => modifyText("backColor", false, e.target.value)} />
-                    </div>
-                </div>
+                    : null}
                 <hr />
-                <div className="text-input" contentEditable={editable}></div>
+                <div className='content'>
+                    <button className='save' onClick={() => setEditable(!editable)}>{
+                        editable ? <SaveIcon /> : <EditIcon />
+                    }</button>
+                    <div className="text-input" contentEditable={editable}></div>
+
+                </div>
             </div>
         </div>
     )
