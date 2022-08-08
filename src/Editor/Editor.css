@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: 90vh;
+}
+
+.box{
+    width: 35vw;
+    box-shadow: 2px 2px 8px 0px rgba(160,179,150,1);
+}
+
+.options{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.text-input {
+    background-color: white;
+    min-height: 30vh;
+    padding: 0 3px;
+}
+
+
+.text-input ol, .text-input ul {
+    margin-left: 30px;
+}
+
+.option-button {
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 2px;
+    margin-left: 1px;
+    cursor: pointer;
+}
+
+.color{
+    padding: 10px 5px;
+}
+select{
+    padding: 3px 5px;
+}
