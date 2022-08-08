@@ -7,10 +7,14 @@ import SuperscriptIcon from '@mui/icons-material/Superscript';
 import SubscriptIcon from '@mui/icons-material/Subscript';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import "./Editor.css"
+import { useState } from 'react';
 
 
 const Editor = (props: object) => {
+
+    const [editable, setEditable] = useState(true)
 
     const options = [
         {
@@ -55,9 +59,22 @@ const Editor = (props: object) => {
         document.execCommand(cmd, defaultUi, value)
     }
 
+    const createLink = () => {
+        let link = prompt("Enter url") as string
+        if (/http/i.test(link)) {
+            modifyText("createLink", false, link);
+        } else {
+            link = "http://" + link;
+            modifyText("createLink", false, link);
+        }
+    }
+
     return (
         <div className="container">
             <div className="box">
+                <button className='save' onClick={() => setEditable(!editable)}>{
+                    editable ? "Save" : "Edit"
+                }</button>
                 <div className="options">
                     {
                         options.map((option) => {
@@ -72,6 +89,7 @@ const Editor = (props: object) => {
                             )
                         })
                     }
+                    <button id="createLink" className='option-button' onClick={() => createLink()}><InsertLinkIcon /></button>
                     <select name="" id="fontName" onChange={(e) => modifyText("fontName", false, e.target.value)}>
                         <option value="Arial">Arial</option>
                         <option value="Times New Roman">Times New Roman</option>
@@ -95,7 +113,7 @@ const Editor = (props: object) => {
                     </div>
                 </div>
                 <hr />
-                <div className="text-input" contentEditable={true}></div>
+                <div className="text-input" contentEditable={editable}></div>
             </div>
         </div>
     )
